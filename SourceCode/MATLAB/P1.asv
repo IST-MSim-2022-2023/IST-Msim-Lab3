@@ -4,7 +4,7 @@ clear; clc; close all;
 
 %% variables
 V = 0;
-K = -0;
+K = -1;
 n = 1;
 %% run Sim
 out = sim('P1simulink2022a',12);
@@ -104,20 +104,20 @@ function PhasePortrait(out)
     set(gcf, 'Position',  [100, 100, 680, 500])
     set(groot,'defaultAxesTickLabelInterpreter','latex');
 
-    x = [-21 21 21 -21]; y = [0 0 25 25];
+    x = [-19 19 19 -19]; y = [0 0 25 25];
     patch(x,y,[0,0,0,0],[0 0 0 0], FaceColor="#D3D5D4",FaceAlpha=0.2); hold on;
 
     plot(out.velocidade, out.Altura, LineStyle='-', LineWidth=2,Color="#2EC4B6");
 
     % markers
-    plot(-14,0,'ko','MarkerFaceColor','#4C8577'); plot(0,0,'ko','MarkerFaceColor','#4C8577');
+    plot(-14,0,'ko','MarkerFaceColor','#4C8577'); plot(14,0,'ko','MarkerFaceColor','#4C8577');
     %plot(-5.74,0,'kv','MarkerFaceColor','#A6ECE0'); plot(4.6,0,'kv','MarkerFaceColor','#A6ECE0');
     hold off;
 
-    ylim([-4 13]); xlim([-20 20]);
+    ylim([-4 13]); xlim([-18 18]);
 
-    yticks([10]);
-    yticklabels({'$\mathbf{z_0}$'});
+    yticks(10);
+%     yticklabels({'$\mathbf{z_0}$'});
 
     ax = gca;
     ax.XAxisLocation = 'origin';
@@ -127,8 +127,8 @@ function PhasePortrait(out)
     
     % adjust ticklabels away from axes
     a=gca;
-    a.YRuler.TickLabelGapOffset = -17;    % negative numbers move the ticklabels right (negative -> left)
+    a.YRuler.TickLabelGapOffset = -20;    % negative numbers move the ticklabels right (negative -> left)
 
-    xticks([-14 0.7]);
-    xticklabels({'$\mathbf{v_z(t_1)}$','$\mathbf{0}$'});
+    xticks([-14  14]);
+    xticklabels({'$\mathbf{v_z(t_1)\equiv -v_z(t_n)}$','$\mathbf{0}$','$\mathbf{-v_z(t_1)\equiv -v_z(t_n)}$'});
 end
