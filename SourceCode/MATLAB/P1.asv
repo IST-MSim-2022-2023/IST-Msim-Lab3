@@ -15,7 +15,14 @@ PhasePortrait(out)
 
 plotBolaSaltitante(out);
 
-for K = [0.]
+figure(2);
+for K = [0.6 0.7 0.8 0.9]
+    K = -K;
+    out = sim('P1simulink2022a',8);
+    plot(out.t, out.Altura);
+    hold on
+end
+hold off;
 
 % for K = 0:0.1:1
 %     K = -K;
