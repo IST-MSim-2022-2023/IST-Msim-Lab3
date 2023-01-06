@@ -9,8 +9,8 @@ Altura = 10;
 V = 15;
 
 %% run Sim
-out1 = sim("P1simulink", 20);
-out2 = sim('P2simulink',20);
+out1 = sim("P1simulink2022a", 20);
+out2 = sim('P2simulink2022a',20);
 
 %% function call
 
@@ -26,7 +26,7 @@ TerminalVelocity()
 function TerminalVelocity()
    
     % Altura
-    out2 = sim('P2simulink',15);
+    out2 = sim('P2simulink2022a',15);
     figure(2)
     subplot(3,1,1)
     plot(out2.t(end),out2.Altura(end),'r*',MarkerSize=10); hold on;

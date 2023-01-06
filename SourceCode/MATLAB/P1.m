@@ -7,7 +7,7 @@ V = 0;
 K = -0;
 n = 1;
 %% run Sim
-out = sim('P1simulink2022a',12);
+out = sim('P1simulink2022a',20);
 
 %% function calls
 

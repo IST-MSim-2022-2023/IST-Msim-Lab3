@@ -13,7 +13,7 @@ Altura = 10;
 V = 15;
 
 %% run Sim
-out = sim("P3simulink", 20);
+out = sim("P3simulink2022a", 20);
 
 %% Plot
 figure(1);
