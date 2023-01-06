@@ -15,6 +15,15 @@ PhasePortrait(out)
 
 plotBolaSaltitante(out);
 
+figure(2);
+for K = [0.6 0.7 0.8 0.9]
+    K = -K;
+    out = sim('P1simulink2022a',8);
+    plot(out.t, out.Altura);
+    hold on
+end
+hold off;
+
 % for K = 0:0.1:1
 %     K = -K;
 %     coef = sim('P1simulink2022a',20);
@@ -64,37 +73,37 @@ function plotBolaSaltitante(out)
             'Interpreter', 'latex', 'Location','best');
 end
 %% Restituition
-function impact = CoefficientOfRestitutionV(coef)
-
-    % find first impact
-    for i = 1:15
-         if coef.Altura(i) <= 0
-             break;
-         end
-    end
-       
-    impact = coef.velocidade(i);
-end
-%% Fit
-function plotFittedCurve(impact)
-    figure(2);
-    set(gcf, 'Position',  [100, 100, 680, 500])
-    K = 0:0.1:1;
-
-    fitobject = fit(impact',K','poly1');
-    fig=plot(fitobject,'-');
-     set(fig,'lineWidth',1);
-     %.................. ^
-     hold on;
-     plot(impact,K,'.','MarkerSize',12);
-     set(gca, 'ydir', 'reverse')
-     grid(); grid minor;
-     legend({'fitted curve','Velocidade do primeiro impacto',}, ...
-            'Interpreter', 'latex', 'Location','best');
-
-    xlabel('\textbf{velocidade ap\''os primeiro impacto [ms$^{-1}$]}','interpreter','latex','FontSize',12)
-    ylabel('\textbf{Coeficiente de Restitui\c{c}\~ao}','interpreter','latex','FontSize',12);
-end
+% function impact = CoefficientOfRestitutionV(coef)
+% 
+%     % find first impact
+%     for i = 1:15
+%          if coef.Altura(i) <= 0
+%              break;
+%          end
+%     end
+%        
+%     impact = coef.velocidade(i);
+% end
+% %% Fit
+% function plotFittedCurve(impact)
+%     figure(2);
+%     set(gcf, 'Position',  [100, 100, 680, 500])
+%     K = 0:0.1:1;
+% 
+%     fitobject = fit(impact',K','poly1');
+%     fig=plot(fitobject,'-');
+%      set(fig,'lineWidth',1);
+%      %.................. ^
+%      hold on;
+%      plot(impact,K,'.','MarkerSize',12);
+%      set(gca, 'ydir', 'reverse')
+%      grid(); grid minor;
+%      legend({'fitted curve','Velocidade do primeiro impacto',}, ...
+%             'Interpreter', 'latex', 'Location','best');
+% 
+%     xlabel('\textbf{velocidade ap\''os primeiro impacto [ms$^{-1}$]}','interpreter','latex','FontSize',12)
+%     ylabel('\textbf{Coeficiente de Restitui\c{c}\~ao}','interpreter','latex','FontSize',12);
+% end
 %% Phase P
 function PhasePortrait(out)
     figure(3)

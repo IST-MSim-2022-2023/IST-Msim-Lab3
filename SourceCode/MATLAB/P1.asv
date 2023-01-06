@@ -4,16 +4,18 @@ clear; clc; close all;
 
 %% variables
 V = 0;
-K = -1;
+K = -0;
 n = 1;
 %% run Sim
-out = sim('P1simulink2022a',12);
+out = sim('P1simulink2022a',20);
 
 %% function calls
 
 PhasePortrait(out)
 
 plotBolaSaltitante(out);
+
+for K = [0.]
 
 % for K = 0:0.1:1
 %     K = -K;
@@ -64,37 +66,37 @@ function plotBolaSaltitante(out)
             'Interpreter', 'latex', 'Location','best');
 end
 %% Restituition
-function impact = CoefficientOfRestitutionV(coef)
-
-    % find first impact
-    for i = 1:15
-         if coef.Altura(i) <= 0
-             break;
-         end
-    end
-       
-    impact = coef.velocidade(i);
-end
-%% Fit
-function plotFittedCurve(impact)
-    figure(2);
-    set(gcf, 'Position',  [100, 100, 680, 500])
-    K = 0:0.1:1;
-
-    fitobject = fit(impact',K','poly1');
-    fig=plot(fitobject,'-');
-     set(fig,'lineWidth',1);
-     %.................. ^
-     hold on;
-     plot(impact,K,'.','MarkerSize',12);
-     set(gca, 'ydir', 'reverse')
-     grid(); grid minor;
-     legend({'fitted curve','Velocidade do primeiro impacto',}, ...
-            'Interpreter', 'latex', 'Location','best');
-
-    xlabel('\textbf{velocidade ap\''os primeiro impacto [ms$^{-1}$]}','interpreter','latex','FontSize',12)
-    ylabel('\textbf{Coeficiente de Restitui\c{c}\~ao}','interpreter','latex','FontSize',12);
-end
+% function impact = CoefficientOfRestitutionV(coef)
+% 
+%     % find first impact
+%     for i = 1:15
+%          if coef.Altura(i) <= 0
+%              break;
+%          end
+%     end
+%        
+%     impact = coef.velocidade(i);
+% end
+% %% Fit
+% function plotFittedCurve(impact)
+%     figure(2);
+%     set(gcf, 'Position',  [100, 100, 680, 500])
+%     K = 0:0.1:1;
+% 
+%     fitobject = fit(impact',K','poly1');
+%     fig=plot(fitobject,'-');
+%      set(fig,'lineWidth',1);
+%      %.................. ^
+%      hold on;
+%      plot(impact,K,'.','MarkerSize',12);
+%      set(gca, 'ydir', 'reverse')
+%      grid(); grid minor;
+%      legend({'fitted curve','Velocidade do primeiro impacto',}, ...
+%             'Interpreter', 'latex', 'Location','best');
+% 
+%     xlabel('\textbf{velocidade ap\''os primeiro impacto [ms$^{-1}$]}','interpreter','latex','FontSize',12)
+%     ylabel('\textbf{Coeficiente de Restitui\c{c}\~ao}','interpreter','latex','FontSize',12);
+% end
 %% Phase P
 function PhasePortrait(out)
     figure(3)
@@ -104,20 +106,20 @@ function PhasePortrait(out)
     set(gcf, 'Position',  [100, 100, 680, 500])
     set(groot,'defaultAxesTickLabelInterpreter','latex');
 
-    x = [-19 19 19 -19]; y = [0 0 25 25];
+    x = [-21 21 21 -21]; y = [0 0 25 25];
     patch(x,y,[0,0,0,0],[0 0 0 0], FaceColor="#D3D5D4",FaceAlpha=0.2); hold on;
 
     plot(out.velocidade, out.Altura, LineStyle='-', LineWidth=2,Color="#2EC4B6");
 
     % markers
-    plot(-14,0,'ko','MarkerFaceColor','#4C8577'); plot(14,0,'ko','MarkerFaceColor','#4C8577');
+    plot(-14,0,'ko','MarkerFaceColor','#4C8577'); plot(0,0,'ko','MarkerFaceColor','#4C8577');
     %plot(-5.74,0,'kv','MarkerFaceColor','#A6ECE0'); plot(4.6,0,'kv','MarkerFaceColor','#A6ECE0');
     hold off;
 
-    ylim([-4 13]); xlim([-18 18]);
+    ylim([-4 13]); xlim([-20 20]);
 
-    yticks(10);
-%     yticklabels({'$\mathbf{z_0}$'});
+    yticks([10]);
+    yticklabels({'$\mathbf{z_0}$'});
 
     ax = gca;
     ax.XAxisLocation = 'origin';
@@ -127,8 +129,8 @@ function PhasePortrait(out)
     
     % adjust ticklabels away from axes
     a=gca;
-    a.YRuler.TickLabelGapOffset = -20;    % negative numbers move the ticklabels right (negative -> left)
+    a.YRuler.TickLabelGapOffset = -17;    % negative numbers move the ticklabels right (negative -> left)
 
-    xticks([-14  14]);
-    xticklabels({'$\mathbf{v_z(t_1)\equiv -v_z(t_n)}$','$\mathbf{0}$','$\mathbf{-v_z(t_1)\equiv -v_z(t_n)}$'});
+    xticks([-14 0.7]);
+    xticklabels({'$\mathbf{v_z(t_1)}$','$\mathbf{0}$'});
 end
