@@ -29,11 +29,8 @@ ylabel('\textbf{$\mathbf{z}$ [m]}','interpreter','latex','FontSize',16);
 
 %% Plot animated
 
+
 figure(2)
-
-xlabel('\textbf{$\mathbf{y}$ [m]}','interpreter','latex','FontSize',16)
-ylabel('\textbf{$\mathbf{z}$ [m]}','interpreter','latex','FontSize',16);
-
 xline(0, '-', 'Parede 1', 'interpreter','latex', 'LineWidth',2,'FontSize',9,"Color","#252323"); 
 hold on
 xline(5, '-', 'Parede 2', 'interpreter','latex', 'LineWidth',2,'FontSize',9,"Color","#252323"); 
@@ -50,15 +47,11 @@ curve=animatedline("Color","#745296","LineStyle","--","LineWidth",1.5);
 
 set(gca,'Xlim',[-1 6])
 for ii=2:length(out.y)
-
-    set(p1,'XData',out.y(ii),'YData',out.Altura(ii));
-    addpoints(curve,out.y(ii),out.Altura(ii));
-    drawnow
-    pause(0.03)
-    
-     frame = getframe(gcf); 
-     exportgraphics(gcf,'testAnimated.gif','Append',true);
+ set(p1,'XData',out.y(ii),'YData',out.Altura(ii));
+ addpoints(curve,out.y(ii),out.Altura(ii));
+ drawnow
+ pause(0.03)
 end
 hold off
 
-
+writeAnimation('wheel.gif')

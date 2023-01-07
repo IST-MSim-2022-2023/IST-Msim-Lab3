@@ -4,7 +4,7 @@ clear; clc; close all;
 
 %% variables
 V = 0;
-K = -0;
+K = -0.8;
 n = 1;
 %% run Sim
 out = sim('P1simulink2022a',20);
