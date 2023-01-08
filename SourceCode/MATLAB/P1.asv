@@ -5,17 +5,17 @@ clear; clc; close all;
 %% variables
 V = 0;
 K = -0.8;
-
+n = 1;
 %% run Sim
-out = sim('P1simulink2022a',20);
-
-%% function calls
-
-PhasePortrait(out)
-
-plotBolaSaltitante(out);
-
-CoefVelocity();
+% out = sim('P1simulink2022a',20);
+% 
+% % function calls
+% 
+% PhasePortrait(out)
+% 
+% plotBolaSaltitante(out);
+% 
+%CoefVelocity();
 
 %% ---- variação do coeficiente de restituição ----%
 fig = figure(2);
@@ -43,24 +43,22 @@ han.XLabel.Visible='on';
 han.YLabel.Visible='on';
 ylabel(han,'$\mathbf{z}$ \textbf{[m]}','FontSize',16,'Interpreter', 'latex');
 xlabel(han,'$\mathbf{t}$ \textbf{[s]}','FontSize',16,'Interpreter', 'latex');
-
 %% ---- variação da velocidade inicial ----%
 K = -0.8;
 
 fig = figure(5);
-set(gcf, 'Position',  [100, 100, 680, 500]) 
-colorVector = ["#CAA8F5","#A66CFF","#8952E2","#6331BC"];
-legendName = ["$v_{z_0} = -10$ ms$^{-1}$","$v_{z_0} = 0$ ms$^{-1}$","$v_{z_0} = 5$ ms$^{-1}$","$v_{z_0} = 10$ ms$^{-1}$"];
+set(gcf, 'Position',  [100, 100, 680, 500])
+colorVector = ["#2EC4B6","#00B2CC","#009BD9","#3480D3"];
+legendName = ["$v_{z_0} = -10$ ms$^{-1}$","$v_{z_0} = -5$ ms$^{-1}$","$v_{z_0} = -5$ ms$^{-1}$","$v_{z_0} = 10$ ms$^{-1}$"];
 k = 1;
-for V = [-10 0 5 10]
-    out = sim('P1simulink2022a',13);
+for V = [-10 -5 5 10]
+    out = sim('P1simulink2022a',20);
     subplot(2,2,k);
     plot(out.t, out.Altura, LineWidth=1.5, Color=colorVector(k));
     legend(legendName(k),'FontSize',10,'Interpreter', 'latex')
     k = k + 1;
     grid minor;
-    xlim([0, 13]);
-    ylim([0 15.5]);
+    xlim([0, 10]);
 end
 
 % Give common xlabel, ylabel and title to your figure
@@ -68,10 +66,8 @@ han=axes(fig,'visible','off');
 han.Title.Visible='on';
 han.XLabel.Visible='on';
 han.YLabel.Visible='on';
-ylabel(han,'$\mathbf{v}$ \textbf{[ms$^{-1}$]}','FontSize',16,'Interpreter', 'latex');
+ylabel(han,'$\mathbf{v}$ \textbf{[ms$^-1$]}','FontSize',16,'Interpreter', 'latex');
 xlabel(han,'$\mathbf{t}$ \textbf{[s]}','FontSize',16,'Interpreter', 'latex');
-
-%-----------------------------------%
 
 %% Plot sistema completo
 function plotBolaSaltitante(out)
