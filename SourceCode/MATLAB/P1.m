@@ -11,6 +11,7 @@ out = sim('P1simulink2022a',20);
 
 %% function calls
 
+Tm = Plot();
 PhasePortrait(out)
 
 plotBolaSaltitante(out);
@@ -199,4 +200,25 @@ function CoefVelocity()
     ylabel('$T_\textit{zeno}$','interpreter','latex','FontSize',16)
     xlabel('$v_{z_0}$','interpreter','latex','FontSize',16);
     grid; grid minor;
+end
+%% 3dPlot
+function x = Plot()
+g = 9.81;
+a = 0.8;
+z_0 = 10;
+
+figure(6);
+set(gcf, 'Position',  [100, 100, 680, 500]);
+
+t=@(x,y) 1/g*(y + sqrt(2*g*z_0+y.^2).*((1+x)./(1-x)));
+x = 0:0.05:0.9;  
+y = -30:2:30;
+
+[X, Y] = meshgrid(x, y);
+colormap("cool")
+s = surfl(X, Y, t(X,Y));
+
+zlabel("$T_{Zeno}$ [s]",'interpreter','latex','FontSize',16)
+ylabel("$v_{z_0}$ [ms$^{-1}$]",'interpreter','latex','FontSize',16)
+xlabel("$\alpha$",'interpreter','latex','FontSize',16)
 end
