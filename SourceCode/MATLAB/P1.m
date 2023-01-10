@@ -7,16 +7,16 @@ V = 0;
 K = -0.8;
 
 %% run Sim
-out = sim('P1simulink2022a',20);
-
-%% function calls
-
-Tm = Plot();
-PhasePortrait(out)
-
-plotBolaSaltitante(out);
-
-CoefVelocity();
+% out = sim('P1simulink2022a',20);
+% 
+% %% function calls
+% 
+%  Tm = Plot();
+% PhasePortrait(out)
+% 
+% plotBolaSaltitante(out);
+% 
+% CoefVelocity();
 
 %% ---- variação do coeficiente de restituição ----%
 fig = figure(2);
@@ -27,13 +27,19 @@ i = 1.5;
 k = 1;
 for K = [0.9 0.8 0.7 0.6]
     K = -K;
-    out = sim('P1simulink2022a',8);
+    if(K == -0.9)
+        out = sim('P1simulink2022a',28);
+    else
+        out = sim('P1simulink2022a',14);
+    end
+
+    [zeno, index] = TZeno(0,-K,out);
     subplot(2,2,k);
-    plot(out.t, out.Altura, LineWidth=i, Color=colorVector(k));
+    plot(out.t(1:index), out.Altura(1:index), LineWidth=i, Color=colorVector(k));hold on;
+    plot(zeno,0,'r*',MarkerSize=10); hold off;
     legend(legendName(k),'FontSize',10,'Interpreter', 'latex')
     i = i + 0.5;
     k = k + 1;
-    xlim([0 8]);
     grid minor;
 end
 
@@ -51,16 +57,18 @@ K = -0.8;
 fig = figure(5);
 set(gcf, 'Position',  [100, 100, 680, 500]) 
 colorVector = ["#CAA8F5","#A66CFF","#8952E2","#6331BC"];
-legendName = ["$v_{z_0} = -10$ ms$^{-1}$","$v_{z_0} = 0$ ms$^{-1}$","$v_{z_0} = 5$ ms$^{-1}$","$v_{z_0} = 10$ ms$^{-1}$"];
+legendName = ["$v_{z_0} = -10$ ms$^{-1}$","$v_{z_0} = -1.56714$ ms$^{-1}$","$v_{z_0} = 0$ ms$^{-1}$","$v_{z_0} = 10$ ms$^{-1}$"];
 k = 1;
-for V = [-10 0 5 10]
-    out = sim('P1simulink2022a',13);
+for V = [-10 -1.56714 0 10]
+    out = sim('P1simulink2022a',20);
     subplot(2,2,k);
-    plot(out.t, out.Altura, LineWidth=1.5, Color=colorVector(k));
+    [zeno, index] = TZeno(V,0.8,out);
+    plot(out.t(1:index), out.Altura(1:index), LineWidth=1.5, Color=colorVector(k));hold on;
+    plot(zeno,0,'r*',MarkerSize=10); hold off;
     legend(legendName(k),'FontSize',10,'Interpreter', 'latex')
     k = k + 1;
     grid minor;
-    xlim([0, 13]);
+    xlim([0, 20]);
     ylim([0 15.5]);
 end
 
@@ -69,7 +77,7 @@ han=axes(fig,'visible','off');
 han.Title.Visible='on';
 han.XLabel.Visible='on';
 han.YLabel.Visible='on';
-ylabel(han,'$\mathbf{v}$ \textbf{[ms$^{-1}$]}','FontSize',16,'Interpreter', 'latex');
+ylabel(han,'$\mathbf{z}$ \textbf{[m]}','FontSize',16,'Interpreter', 'latex');
 xlabel(han,'$\mathbf{t}$ \textbf{[s]}','FontSize',16,'Interpreter', 'latex');
 
 %-----------------------------------%
@@ -207,18 +215,38 @@ g = 9.81;
 a = 0.8;
 z_0 = 10;
 
-figure(6);
 set(gcf, 'Position',  [100, 100, 680, 500]);
 
 t=@(x,y) 1/g*(y + sqrt(2*g*z_0+y.^2).*((1+x)./(1-x)));
+tDerivative = @(x,y) 1/g*(y./(sqrt(2*g*z_0+y.^2)).*((1+x)./(1-x))+1);
 x = 0:0.05:0.9;  
 y = -30:2:30;
 
+figure(6);
 [X, Y] = meshgrid(x, y);
 colormap("cool")
+x = t(X,Y);
 s = surfl(X, Y, t(X,Y));
 
 zlabel("$T_{Zeno}$ [s]",'interpreter','latex','FontSize',16)
 ylabel("$v_{z_0}$ [ms$^{-1}$]",'interpreter','latex','FontSize',16)
 xlabel("$\alpha$",'interpreter','latex','FontSize',16)
+
+figure(7)
+
+fc = fcontour(tDerivative);
+fc.LevelList = [0,0];
+xlim([0,1]);
+ylim([-30,30]);
+end
+%% Zeno limit
+function [zeno, index] = TZeno(V,alpha,out)
+    z_0 = 10; g = 9.81;
+
+    t=@(x,y) 1/g*(y + sqrt(2*g*z_0+y^2)*((1+x)/(1-x)));
+
+    zeno = t(alpha,V)
+    
+    indexArray = find(out.t<=zeno)
+    index = indexArray(end)
 end
