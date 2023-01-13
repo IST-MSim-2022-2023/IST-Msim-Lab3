@@ -9,7 +9,10 @@ V = zeros(length(U),length(U)) -g;
 xacceptIndex = X >= xTresh;
 yacceptIndex = Y >= yTresh;
 
-quiver(Y(yacceptIndex),X(yacceptIndex),V(yacceptIndex),U(yacceptIndex),LineWidth=0.01, Color = 'b'); hold on;
-quiver(Y(xacceptIndex),X(xacceptIndex),V(xacceptIndex),U(xacceptIndex),LineWidth=0.01, Color='b');
+quiver(Y(yacceptIndex),X(yacceptIndex),V(yacceptIndex),U(yacceptIndex),LineWidth=0.01, Color = "#5AA4FF"); hold on;
+quiver(Y(xacceptIndex),X(xacceptIndex),V(xacceptIndex),U(xacceptIndex),LineWidth=0.01, Color="#5AA4FF"); 
+
+h=gca; h.XAxis.TickLength = [0 0];
+h=gca; h.YAxis.TickLength = [0 0];
 
 ylim([-4 13]); xlim([-20 20]);
