@@ -126,16 +126,8 @@ end
 function PhasePortrait(out)
 
     %quiver
-    g = 9.81;
-
-    [X,Y] = meshgrid(0:2:38,-19:2:19);
-    xTresh = 0.1;
-    yTresh = -0.1;
-    U = Y;
-    V = zeros(length(U),length(U)) -g;
-    
-    xacceptIndex = X >= xTresh;
-    yacceptIndex = Y >= yTresh;
+    z = @(x,y) y + x
+    [Velocidade,Altura] = meshgrid(-10:0.1:10,0:0.1:20);
 
     figure(3)
     
@@ -148,8 +140,7 @@ function PhasePortrait(out)
     patch(x,y,[0,0,0,0],[0 0 0 0], FaceColor="#D3D5D4",FaceAlpha=0.2); hold on;
 
     plot(out.velocidade, out.Altura, LineStyle='-', LineWidth=2,Color="#2EC4B6"); hold on;
-    quiver(Y(yacceptIndex),X(yacceptIndex),V(yacceptIndex),U(yacceptIndex),LineWidth=0.01, Color = "#5AA4FF"); hold on;
-    quiver(Y(xacceptIndex),X(xacceptIndex),V(xacceptIndex),U(xacceptIndex),LineWidth=0.01, Color="#5AA4FF"); hold on;
+    quiver(out.velocidade, out.Altura); hold off
 
     % markers
     plot(-14,0,'ko','MarkerFaceColor','#4C8577'); plot(0,0,'ko','MarkerFaceColor','#4C8577');
