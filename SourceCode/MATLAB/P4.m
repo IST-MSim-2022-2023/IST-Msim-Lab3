@@ -6,11 +6,11 @@ clear; clc; close all;
 
 %init
 Altura = 10;
-V = 15;
+V = 0;
 K = -0.8;
 
 %% run Sim
-out = sim("P4simulink2022a", 12); %8.5
+out = sim("P4simulink2022a", 20); %8.5
 
 %% Plot
 figure(1);
