@@ -78,7 +78,7 @@
 \begin{itemize}
     \item[$\blacktriangle$] A \hyperref[fig:P4-3dPlot]{Fig. 11 (a)} permite vizualizar espacialmente os embates da bola com as super- fícies e os consequentes \textit{jumps} que se sucedem com estes eventos. O resultado final são segmentos da trajetória obtidos com base no período de \textit{flow} que sucede cada \textit{jump}.
     
-    \item[$\blacktriangle$] O uso das duas paredes delimita a trajetória da massa puntiforme, como visível na \hyperref[fig:BouncingBallGif]{Fig. 11 (b)}. Esta delimitação permite visualizar com uma maior frequência o efeito da reflexão do movimento horizontal, mantendo a massa pontual \textit{bounded}. Caso não se verificasse \textit{bounded}, a posição tenderia para menos infinito após a primeira colisão vertical, uma vez que não possui aceleração constante no sentido da superfície vertical em $P$.
+    \item[$\blacktriangle$] O uso das duas paredes delimita a trajetória da massa puntiforme, como visível na \hyperref[fig:BouncingBallGif]{Fig. 11 (b)}. Esta delimitação permite visualizar com uma maior frequência o efeito da reflexão do movimento horizontal, mantendo a massa pontual \textit{bounded}. Caso não se verificasse \textit{bounded}, a posição tenderia para menos infinito após a primeira colisão com a parede, uma vez que não possui aceleração constante no sentido da superfície vertical em $P$.
 \end{itemize}
 
 %//==============================--A--==============================//%
@@ -100,13 +100,13 @@
         \caption{Componente horizontal.} 
         \label{fig:P4-y} 
     \end{subfigure}%%
-    \caption{Evolução temporal das componentes verticais e horizontais do sistema. Ao contrário da vertical, os gráficos associados à parte horizontal sofrem uma dilatação ao longo do tempo, dado que as colisões se tornam cada vez menos frequentes, graças à dissipação energética imposta pelo fator $\alpha_y = 0.8$. O marcador (\textcolor{red}{$\bullet$}) denota o fim da simulação.}
+    \caption{Evolução temporal das componentes verticais e horizontais do sistema. Ao contrário da vertical, os gráficos associados à parte horizontal sofrem uma dilatação ao longo do tempo, dado que as colisões se tornam cada vez menos frequentes, graças à dissipação energética imposta pelo fator $\alpha_y = 0.8$. O marcador (\textcolor{red}{$\bullet$}) denota o fim da simulação (interrompendo o período de \textit{flow}).}
     \label{fig:P4-z-y}
 \end{figure}
 %\fi
 
 %\iffalse
-\vspace{-2em}
+\vspace{-1.85em}
 \begin{figure}[H]
     \begin{subfigure}[b]{0.5\linewidth}
         \centering
@@ -120,7 +120,7 @@
         \caption{Componente horizontal. Efeito da dilatação temporal associada. Os intervalos tendem para infinito.} 
         \label{fig:P4-antizeno} 
     \end{subfigure}%%
-    \caption{Evolução da duração dos intervalos de tempo entre colisões com a superfícies horizontal e superfícies verticais. Consoante a discussão da \hyperref[subsec:P1]{secção P1}, verifica-se que $T_{Zeno} =  20.3576$ s, inde- pendente de qualquer influência da componente horizontal, como esperado, dada a ortogonalidade. $t_{final}$ representa o instante final do último período de \textit{flow} completo aparente na \hyperref[fig:P4-y]{Fig. 12 (b)}.}
+    \caption{Evolução da duração dos intervalos de tempo entre colisões com a superfícies horizontal e superfícies verticais. Consoante a discussão na \hyperref[subsec:P1]{secção P1}, verifica-se que $T_{Zeno} =  20.3576$ s, inde- pendente de qualquer influência da componente horizontal, como esperado, dada a ortogonalidade. $t_{final}$ representa o instante final do último período de \textit{flow} completo aparente na \hyperref[fig:P4-y]{Fig. 12 (b)}.}
     \label{fig:P4-zenos}
 \end{figure}
 %\fi

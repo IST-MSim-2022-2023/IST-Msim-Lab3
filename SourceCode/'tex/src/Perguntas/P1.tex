@@ -40,7 +40,7 @@ $$
 \vspace{-0.5em}
 \noindent em que $z(t_{n-1})$ é a altura inicial do período de \textit{flow}\footnotemark[4] $n$, e $v_{z}(t_{n-1}^+)$ a velocidade inicial desse mesmo período (para $n \ge 2$, será a velocidade após o \textit{jump} \hyperref[sec:intro]{definido acima}).
 
-\footnotetext[4]{A altura inicial é nula para todos os períodos de \textit{flow} subsequentes ao 1\textordmasculine ($n \ge 2: z(t_{n-1}) \equiv 0$). Para o primeiro período ($n=1$), são assumidas as condições iniciais impostas: $z_0$ e $v_{z_0}$.}
+\footnotetext[4]{A altura inicial é nula para todos os períodos de \textit{flow} subsequentes ao 1\textordmasculine{} ($n \ge 2: z(t_{n-1}) \equiv 0$). Para o primeiro período ($n=1$), são assumidas as condições iniciais impostas: $z_0$ e $v_{z_0}$.}
 
 Relembrando a \underline{Lei de Conservação d'Energia}: $\Delta E = \Delta T + \Delta U = 0$ (dado que não são aplicadas forças externas ao sistemas ao longo de cada período de \textit{flow}), trivialmente se obtém $v_{z}$ imediatamente antes do primeiro choque:
 \vspace{-0.5em}
@@ -70,7 +70,7 @@ $$
 %//==============================--C--==============================//%
 \clearpage
 
-\noindent $\pmb{\rightarrow}$ \textbf{\textit{Condições iniciais e solução de Zeno}}
+\noindent $\pmb{\rightarrow}$ \textbf{\textit{Condições iniciais e fenómeno de Zeno}}
 
 \noindent Para as condições iniciais \hyperref[fig:P1-SistemaCompleto]{expostas acima} e $\alpha = 0.8$, obtém-se $T_{Zeno} = 12.8506\text{ s}$. Este fenómeno é capturado em ambiente de simulação através da deteção (\textit{default}) de \textit{consecutive zero crossing events} em intervalos de tempo ínfimos:
 
@@ -109,9 +109,9 @@ De modo a garantir a generalidade da discussão, explora-se a (expectável) rela
 \end{figure}
 
 \renewcommand*{\thefootnote}{\arabic{footnote}}
-\footnotetext[6]{Do outro lado do espectro, um $\alpha \to +\infty$ implica um aumento avassalador de $T_{Zeno}$, como aparente na \hyperref[fig:matrixcoef]{Fig. 4 (c)} e nos \hyperref[fig:phase-portrait]{retratos de fase subsequentes}.}
+\footnotetext[6]{Do outro lado do espectro, um $\alpha \to 1$ implica um aumento avassalador de $T_{Zeno}$ ($\to +\infty$), como aparente na \hyperref[fig:matrixcoef]{Fig. 4 (c)} e nos \hyperref[fig:phase-portrait]{retratos de fase subsequentes}.}
 
-\footnotetext[7]{O $v_{z_0}$ minimizante de $T_{Zeno}$ diminui o intervalo de tempo até ao 1\textordmasculine choque, não aumentando substancialmente os períodos de \textit{flow} subsequentes.}
+\footnotetext[7]{O $v_{z_0}$ minimizante de $T_{Zeno}$ diminui o intervalo de tempo até ao 1\textordmasculine{} choque, não aumentando substancialmente os períodos de \textit{flow} subsequentes.}
 
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 \footnotetext[2]{ 
@@ -179,13 +179,13 @@ $ \hfill\raisebox{-0.8 em}{\ensuremath{\Box}}
     \begin{subfigure}[b]{0.5\linewidth}
         \centering
         \includegraphics[width=1\linewidth]{img/P1/P1-PhasePortrait-alpha=0.png}
-        \caption{Retrato de fase para $z_0 = 10$ m, $v_{z_0} = 0$ ms$^{-1}$ e $\pmb{\underline{\alpha = 0}}$.} 
+        \caption{Retrato de fase para $z_0 = 10$ m, $v_{z_0} = 0$ ms$^{-1}$ e\\ $\pmb{\underline{\alpha = 0}}$.} 
         \label{fig:phase-portrait-alpha0} 
     \end{subfigure}%% 
     \begin{subfigure}[b]{0.5\linewidth}
         \centering
         \includegraphics[width=1\linewidth]{img/P1/P1-PhasePortrait-alpha=1.png} 
-        \caption{Retrato de fase para $z_0 = 10$ m, $v_{z_0} = 0$ ms$^{-1}$ e $\pmb{\underline{\alpha = 1}}$.} 
+        \caption{Retrato de fase para $z_0 = 10$ m, $v_{z_0} = 0$ ms$^{-1}$ e\\ $\pmb{\underline{\alpha = 1}}$.} 
         \label{fig:phase-portrait-alpha1} 
     \end{subfigure} 
     \caption{Comportamento do sistema da bola saltitante para os casos limites em que o coeficiente de restituição $\alpha$ toma os valores: $\pmb{0}$ (\textbf{colisão inelástica} $\rightarrow$ perda máxima de energia $\rightarrow \pmb{T_{Zeno} = t_1}$) e $\pmb{1}$ (\textbf{colisão perfeitamente elástica} $\rightarrow$ conservação total da energia cinética $\rightarrow \pmb{T_{Zeno} \to +\infty}$).}
