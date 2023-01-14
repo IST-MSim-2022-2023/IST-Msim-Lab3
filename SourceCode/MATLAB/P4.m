@@ -6,11 +6,11 @@ clear; clc; close all;
 
 %init
 Altura = 10;
-V = 0;
+V = 15;
 K = -0.8;
 
 %% run Sim
-out = sim("P4simulink2022a", 20); %8.5
+out = sim("P4simulink2022a", 20.35); %8.5
 
 %% Plot
 figure(1);
@@ -67,42 +67,55 @@ figure(3)
 set(gcf, 'Position',  [100, 100, 680, 500])
 
 subplot(2,1,1)
-plot(out.t,out.y, Color="#2C73D2", LineWidth=1.5);
+plot(out.t,out.y, Color="#2C73D2", LineWidth=1.5); hold on
+plot(20.3576369894,out.y(end),'r.',MarkerSize=15); hold off;
 
 xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
 ylabel('\textbf{$\mathbf{y}$ [m]}','interpreter','latex','FontSize',16);
 
-xlim([0 11.7]);
+xlim([0 21]);
 grid on; grid minor;
 
 subplot(2,1,2)
-plot(out.t,out.vy,Color="#2C73D2",LineWidth=1.5);
+plot(out.t,out.vy,Color="#2C73D2",LineWidth=1.5); hold on
+plot(20.3576369894,out.vy(end),'r.',MarkerSize=15); hold off;
 
 xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
 ylabel('\textbf{$\mathbf{v_y}$ [ms$^{-1}$]}','interpreter','latex','FontSize',16);
 
-xlim([0 11.7]);
+legend({'','\textbf{Marcador de Zeno}'}, ...
+            'Interpreter', 'latex', 'Location','best');
+
+xlim([0 21]);
 grid on; grid minor;
 
-
+%%
 figure(4)
 set(gcf, 'Position',  [100, 100, 680, 500])
 
 subplot(2,1,1)
-plot(out.t,out.Altura, Color="#2C73D2", LineWidth=1.5);
+plot(out.t,out.Altura, Color="#2C73D2", LineWidth=1.5);hold on;
+plot(20.3576369894,0,'r*',MarkerSize=10); hold off;
 
 xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
 ylabel('\textbf{$\mathbf{z}$ [m]}','interpreter','latex','FontSize',16);
 
-xlim([0 11.7]);
+legend({'','\textbf{Marcador de Zeno}'}, ...
+            'Interpreter', 'latex', 'Location','best');
+
+xlim([0 21]);
 grid on; grid minor;
 
 subplot(2,1,2)
-plot(out.t,out.velocidade,Color="#2C73D2",LineWidth=1.5);
+plot(out.t,out.velocidade,Color="#2C73D2",LineWidth=1.5); hold on;
+plot(20.3576369894,0,'r*',MarkerSize=10); hold off;
 
 xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
 ylabel('\textbf{$\mathbf{v_z}$ [ms$^{-1}$]}','interpreter','latex','FontSize',16);
 
-xlim([0 11.7]);
+legend({'','\textbf{Marcador de Zeno}'}, ...
+            'Interpreter', 'latex', 'Location','best');
+
+xlim([0 21]);
 grid on; grid minor;
 

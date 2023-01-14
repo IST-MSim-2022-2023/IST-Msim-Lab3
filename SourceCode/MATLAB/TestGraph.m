@@ -8,7 +8,7 @@ V = 1;
 K = -0.8;
 
 %% run Sim
-out = sim('P4simulink2022a',12);
+out = sim('P4simulink2022a',21);
 %%
 j(1) = 0;
 
