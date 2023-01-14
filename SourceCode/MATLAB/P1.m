@@ -9,14 +9,14 @@ K = -0.8;
 %% run Sim
 out = sim('P1simulink2022a',13);
 % 
-% %% function calls
+%% function calls
 % 
-%Tm = Plot();
+Tm = Plot();
 PhasePortrait(out)
 % 
-% plotBolaSaltitante(out);
+plotBolaSaltitante(out);
 % 
-% CoefVelocity();
+CoefVelocity();
 
 %% ---- variação do coeficiente de restituição ----%
 fig = figure(2);

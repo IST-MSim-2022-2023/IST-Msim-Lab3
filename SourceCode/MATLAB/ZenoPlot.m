@@ -1,4 +1,4 @@
-%% P1
+%% P4 - Zeno Plot
 %% clear->erase workspace variables, clc->clean command window, close all-> close all currently open figures
 clear; clc; close all;
 
