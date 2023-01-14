@@ -1,0 +1,112 @@
+\usetikzlibrary{automata, arrows.meta, positioning}
+%//==============================--@--==============================//%
+%\vspace{-1em}
+\section{Introdução}
+\label{sec:intro}
+
+Uma vasta panóplia de sistemas mecânicos envolvem \underline{impactos}. Estes sistemas admitem um \textit{flow}\footnotemark[1] entre impactos. A aproximação (amplamente) considerada para os impactos sugere considerá-los como instantâneos---e, consequentemente, como \textit{triggers} que levam a transições de estado do sistema (\textit{jumps}\footnotemark[1]). 
+
+Deste modo, \underline{sistemas com impactos}---tal como o caso de estudo---podem ser vistos como \underline{sistemas híbridos}.
+
+%//==============================--A--==============================//%
+\vspace{1em}
+\noindent $\pmb{\rightarrow}$ \textit{\textbf{Bola saltitante} (modelo de massa puntiforme---lagrangian hybrid system)}
+\vspace{0.25em}
+
+\noindent O estado da massa pontual pode ser descrito como
+
+\vspace{-0.9em}
+$$
+    \pmb{x} := 
+            \begin{bmatrix}
+                z\\
+                v_z
+            \end{bmatrix}
+            \in \mathbb{R}_{\ge 0} \times \mathbb{R}
+            \text{,}
+$$
+
+\vspace{-0.2em}
+\noindent onde $z$ representa a posição da bola (acima da superfície), e $v_z$ a velocidade vertical.
+
+É natural estipular que o \textit{flow} é permissível quando a bola se encontra acima da superfície, ou quando se encontra na superfície com o vetor velocidade a apontar para cima. Deste modo, o \textit{flow set} é
+
+\vspace{-1em}
+$$ 
+    C := \left\{ \pmb{x}: z > 0\; \lor\; z = 0\; \land\; v_z \ge 0 \right\}.
+$$
+
+\vspace{-0.25em}
+\noindent E a escolha do \textit{flow map} pode ser dada por
+
+\vspace{-0.75em}
+$$
+    f(\pmb{x}) := \begin{bmatrix} v_z \\ -g \end{bmatrix}\qquad \forall \pmb{x} \in C\text{,}
+$$
+
+\vspace{0em}
+\noindent onde $-g$ representa a aceleração gravítica. Os impactos sucedem-se com o embate da massa pontual com velocidade negativa com a superfície. E assim, o \textit{jump set}\footnotemark[2] é
+
+\vspace{-1em}
+$$
+    D := \left\{ \pmb{x}: z = 0,\; v_z < 0 \right\}.
+$$
+
+\vspace{-0.25em}
+\noindent O \textit{jump map} é dado, para um determinado $\alpha \in [0, 1]$ (coeficiente de restituição), por
+
+\vspace{-0.75em}
+$$
+    g(\pmb{x}) := \begin{bmatrix} 0 \\ -\alpha\,v_z \end{bmatrix} \quad \forall \pmb{x} \in D\text{.}
+$$
+\vspace{-1.75em}
+\begin{figure}[H]
+    \begin{minipage}[c]{0.4\linewidth}
+        \begin{tikzpicture}[node distance = 2.7cm, on grid, auto, transform shape]
+            
+            \node[state,
+                initial,
+                initial text = {$\pmb{x}(t_0) \in C$},
+                fill=orange!20,
+                align=center,
+                inner sep=0pt] (q_0) 
+            {\textit{\underline{Flow}}\\ $\begin{cases} \dot{z} = v_z\\ \dot{v_z} = -g \end{cases}$\\ $\pmb{x} \in C$};
+            
+            \path [-stealth, thick]
+                (q_0) edge[loop right] 
+                node[above, yshift = 0.5cm]
+                    {$\pmb{x} \in D$}
+                node[right, yshift = -0.25cm] 
+                    {$\begin{aligned}
+                        &\;\, \textit{\underline{Jump}}\\[-0.7ex]
+                        v_z &:= -\alpha \cdot v_z
+                    \end{aligned}$} 
+                (q_0);
+                
+        \end{tikzpicture}
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.45\linewidth}
+    $$
+        \:\pmb{\iff}\;\:
+        \begin{cases}
+            \pmb{x} \in C & \dot{\pmb{x}} = f(\pmb{x}) \\
+            \pmb{x} \in D & \pmb{x}^{+} = g(\pmb{x}) 
+        \end{cases}
+    $$
+    \end{minipage}
+    \caption{\underline{Modelo da bola saltitante}.}
+    \label{fig:bouncing-ball}
+\end{figure}
+
+\vspace{-0.75em}
+\noindent No \hyperref[fig:bouncing-ball]{modelo para a bola saltitante exposto acima}, para um $\alpha \in\, ]0,1[$, cada \textit{jump} é seguido por um período de \textit{flow} (sucessivamente mais curto). Por outras palavras, \textit{jumps} consecutivos não ocorrem\cite{Goebel2012-ho} (apesar de se verificarem consecutivamente menos espaçados, $\to 0$). Estas ilações iluminam o \hyperref[def:zeno]{\underline{efeito de Zeno}}, também alvo de estudo.
+
+\begin{theo}[\underline{Def.:} Efeito de Zeno $\pmb{\star}$]{def:zeno}
+    \label{def:zeno}
+    ``\textit{Zeno behavior is a phenomenon in hybrid systems that (...) exists when an \underline{infinite number of discrete transitions occur in a finite time interval}}.''\cite{Ames2006-fl}
+\end{theo}
+
+%//==============================--@--==============================//%
+\footnotetext[1]{``\textit{To shorten the terminology, the behavior of a dynamical system that can
+be described by a differential equation or inclusion is referred to as flow. The behavior of a dynamical system that can be described by a difference equation or inclusion is referred to as jumps}.''\cite{Goebel2012-ho}}
+\footnotetext[2]{Devido ao funcionamento do SIMULINK\textregistered{} consideramos, na simulação computacional, um $z \le 0$.}
