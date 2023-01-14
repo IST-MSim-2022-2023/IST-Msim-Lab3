@@ -64,6 +64,7 @@ hold off
 %% plot subplots
 
 figure(3)
+set(gcf, 'Position',  [100, 100, 680, 500])
 
 subplot(2,1,1)
 plot(out.t,out.y, Color="#2C73D2", LineWidth=1.5);
@@ -85,6 +86,7 @@ grid on; grid minor;
 
 
 figure(4)
+set(gcf, 'Position',  [100, 100, 680, 500])
 
 subplot(2,1,1)
 plot(out.t,out.Altura, Color="#2C73D2", LineWidth=1.5);
