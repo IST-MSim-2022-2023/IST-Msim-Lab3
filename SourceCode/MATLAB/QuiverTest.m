@@ -9,10 +9,14 @@ V = zeros(length(U),length(U)) -g;
 xacceptIndex = X >= xTresh;
 yacceptIndex = Y >= yTresh;
 
-quiver(Y(yacceptIndex),X(yacceptIndex),V(yacceptIndex),U(yacceptIndex),LineWidth=0.01, Color = "#5AA4FF"); hold on;
-quiver(Y(xacceptIndex),X(xacceptIndex),V(xacceptIndex),U(xacceptIndex),LineWidth=0.01, Color="#5AA4FF"); 
+set(gcf, 'Position',  [100, 100, 600, 480])
+
+
+quiver(Y,X,V,U,LineWidth=0.01, Color = "#5AA4FF");
+
 
 h=gca; h.XAxis.TickLength = [0 0];
 h=gca; h.YAxis.TickLength = [0 0];
+set(gca,'Visible','off');
 
 ylim([-4 13]); xlim([-20 20]);

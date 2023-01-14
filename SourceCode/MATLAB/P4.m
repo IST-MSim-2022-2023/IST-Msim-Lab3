@@ -6,11 +6,11 @@ clear; clc; close all;
 
 %init
 Altura = 10;
-V = 30;
+V = 15;
 K = -0.8;
 
 %% run Sim
-out = sim("P4simulink2022a", 15); %8.5
+out = sim("P4simulink2022a", 12); %8.5
 
 %% Plot
 figure(1);
@@ -61,4 +61,46 @@ for ii=2:length(out.y)
 end
 hold off
 
+%% plot subplots
+
+figure(3)
+
+subplot(2,1,1)
+plot(out.t,out.y, Color="#2C73D2", LineWidth=1.5);
+
+xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
+ylabel('\textbf{$\mathbf{y}$ [m]}','interpreter','latex','FontSize',16);
+
+xlim([0 11.7]);
+grid on; grid minor;
+
+subplot(2,1,2)
+plot(out.t,out.vy,Color="#2C73D2",LineWidth=1.5);
+
+xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
+ylabel('\textbf{$\mathbf{v_y}$ [ms$^{-1}$]}','interpreter','latex','FontSize',16);
+
+xlim([0 11.7]);
+grid on; grid minor;
+
+
+figure(4)
+
+subplot(2,1,1)
+plot(out.t,out.Altura, Color="#2C73D2", LineWidth=1.5);
+
+xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
+ylabel('\textbf{$\mathbf{z}$ [m]}','interpreter','latex','FontSize',16);
+
+xlim([0 11.7]);
+grid on; grid minor;
+
+subplot(2,1,2)
+plot(out.t,out.velocidade,Color="#2C73D2",LineWidth=1.5);
+
+xlabel('\textbf{$\mathbf{t}$ [s]}','interpreter','latex','FontSize',16)
+ylabel('\textbf{$\mathbf{v_z}$ [ms$^{-1}$]}','interpreter','latex','FontSize',16);
+
+xlim([0 11.7]);
+grid on; grid minor;
 
